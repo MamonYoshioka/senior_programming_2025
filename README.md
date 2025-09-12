@@ -85,4 +85,110 @@ button {
 
 ### JavaScriptで動きをつける
 
+いよいよプログラミングの醍醐味です。JavaScriptを使って、ゲームのルールや動きを実装していきます。今回は、動くものを作るというコンセプトなので、細かいところは気にしないでください。
 
+1. HTMLファイル（index.html）とCSSファイル（style.css）があるフォルダーに、新しく`main.js`という名前のファイルを作成します。
+
+2. このJavaScriptファイルをHTMLに読み込ませる必要があります。index.htmlファイルの<body>タグの一番最後に、以下のコードを追加してください。
+
+```html
+<body>
+    <h1>タイピングゲーム</h1>
+    <p>準備ができたら「スタート」ボタンを押してください。</p>
+    <button id="start-button">スタート</button>
+    <script src="main.js"></script><!--追加-->
+</body>
+```
+
+3. `main.js`ファイルに、以下のコードを書いてみましょう。
+
+```javascript
+// 「スタート」ボタンが押されたら動くプログラム
+const startButton = document.querySelector('#start-button');
+
+startButton.addEventListener('click', () => {
+    alert('ゲームを開始します！');
+});
+```
+
+4. ポップアップが出せたら、いよいよタイピングゲームの核となる部分を作っていきます。
+ここで、ボタンを押したら、問題文や入力欄が表示されるように、index.htmlファイルを少し変更します。
+
+```html
+<body>
+    <h1>タイピングゲーム</h1>
+    <!--追加 start-->
+    <div id="game-area">
+        <p id="question-text"></p>
+        <input type="text" id="typing-input" disabled>
+    </div>
+    <!--追加 end-->
+    <p>準備ができたら「スタート」ボタンを押してください。</p>
+    <button id="start-button">スタート</button>
+
+    <script src="main.js"></script>
+</body>
+```
+
+5. `main.js`にタイピングゲームが動くようにおまじない(ロジック)を作成して行きます。
+
+```javascript
+// 必要な要素をHTMLから取得
+const startButton = document.querySelector('#start-button');
+const questionText = document.querySelector('#question-text');
+const typingInput = document.querySelector('#typing-input');
+
+// 問題文のリスト
+const questions = ['JavaScriptは楽しい', 'プログラミングは面白い', 'タイピングゲームを作ろう'];
+let currentQuestionIndex = 0;
+
+// ゲーム開始関数
+const startGame = () => {
+    // 1. スタートボタンを非表示にする
+    startButton.style.display = 'none';
+    // 2. 入力欄を有効にする
+    typingInput.disabled = false;
+    // 3. 最初の問題を表示する
+    displayQuestion();
+};
+
+// 問題を表示する関数
+const displayQuestion = () => {
+    questionText.textContent = questions[currentQuestionIndex];
+    typingInput.value = ''; // 入力欄を空にする
+    typingInput.focus();    // 入力欄にカーソルを合わせる
+};
+
+// 入力された文字をチェックする関数
+const checkTyping = () => {
+    const typedValue = typingInput.value;
+    const currentQuestion = questions[currentQuestionIndex];
+
+    // 入力した文字と問題文を比較
+    if (typedValue === currentQuestion) {
+        // 問題文と一致したら
+        alert('正解！');
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            displayQuestion();
+        } else {
+            alert('全問クリア！おめでとうございます！');
+            // ゲーム終了後の処理をここに書く
+        }
+    }
+};
+
+// イベントリスナーの設定
+startButton.addEventListener('click', startGame);
+typingInput.addEventListener('input', checkTyping);
+```
+
+## 動作確認
+
+最後に、`index.html`をブラウザーで開き直して、ゲームを試してみてください。
+
+1. 「スタート」ボタンを押すと、ボタンが消えて問題文が表示されます。
+
+2. 入力欄に「JavaScriptは楽しい」と正確に打ち込むと、「正解！」というメッセージが表示され、次の問題に進みます。
+
+この状態までできれば、タイピングゲームの基本的な仕組みは完成です！ お疲れ様でした。
