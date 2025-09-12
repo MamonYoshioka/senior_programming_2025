@@ -1,0 +1,16 @@
+body {
+    background-color: #f0f0f0; /* 背景を薄いグレーに */
+    font-family: sans-serif; /* 文字の形をシンプルに */
+    text-align: center; /* 全ての文字を真ん中に寄せる */
+    padding-top: 50px; /* 上に少し隙間を作る */
+}
+
+h1 {
+    color: #333; /* 見出しの色を濃いグレーに */
+}
+
+button {
+    padding: 10px 20px; /* ボタンの内側に隙間を作る */
+    font-size: 18px; /* 文字の大きさを少し大きく */
+    cursor: pointer; /* マウスを乗せると指の形に変わる */
+}
