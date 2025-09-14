@@ -23,7 +23,7 @@
 
 これから作るものは、最終的に以下のようになります！
 
-[タイピングゲーム](./imgs/typing.mp4)
+[YouTube](https://youtu.be/YOyzH9WAAYw)
 
 ### HTMLで骨格を作る
 
